@@ -82,7 +82,25 @@
          Haz clic en cualquier tarjeta para ver la explicación ampliada y un ejemplo concreto.</p>
     </div>
     <div class="tecnicas reveal" id="conceptosLista"></div>
-    <div class="detalle" id="detalleConcepto" role="region" aria-live="polite"></div>
+
+    <!-- Ventana de detalle del concepto -->
+    <dialog class="modal" id="modalConcepto" aria-labelledby="modalTitulo">
+      <div class="modal__head">
+        <span class="modal__icono" id="modalIcono"></span>
+        <h3 id="modalTitulo"></h3>
+        <button class="modal__cerrar" id="modalCerrar" type="button" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal__body" id="modalCuerpo"></div>
+      <div class="modal__pie">
+        <button class="btn btn--secundario btn--sm" id="modalAnterior" type="button">
+          <span class="modal__flecha modal__flecha--izq"></span>Anterior
+        </button>
+        <span class="modal__pos" id="modalPos"></span>
+        <button class="btn btn--secundario btn--sm" id="modalSiguiente" type="button">
+          Siguiente<span class="modal__flecha"></span>
+        </button>
+      </div>
+    </dialog>
 
     <!-- Autoevaluación -->
     <div class="quiz reveal" id="quiz">

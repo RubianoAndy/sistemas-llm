@@ -38,9 +38,11 @@
      ======================================================== */
   function montarConceptos() {
     const cont = $('#conceptosLista');
-    const panel = $('#detalleConcepto');
+    const modal = $('#modalConcepto');
+    let actual = 0;
+    let origen = null;   // tarjeta desde la que se abrió, para devolverle el foco
 
-    CONCEPTOS.forEach(c => {
+    CONCEPTOS.forEach((c, i) => {
       const card = crear('button', 'tecnica', `
         <div class="tecnica__icono">${ICONOS[c.icono]}</div>
         <h3>${c.titulo}</h3>
@@ -48,35 +50,62 @@
         <span class="tecnica__mas">Ver detalle ${ICONOS.flecha}</span>
       `);
       card.type = 'button';
-      card.setAttribute('aria-expanded', 'false');
-      card.addEventListener('click', () => abrir(c, card));
+      card.setAttribute('aria-haspopup', 'dialog');
+      card.addEventListener('click', () => abrir(i, card));
       cont.appendChild(card);
     });
 
-    function cerrar() {
-      panel.classList.remove('visible');
-      $$('#conceptosLista .tecnica').forEach(c => { c.classList.remove('activo'); c.setAttribute('aria-expanded', 'false'); });
+    $('#modalCerrar').innerHTML = ICONOS.cerrar;
+    $$('.modal__flecha').forEach(el => el.innerHTML = ICONOS.flecha);
+
+    const tarjetas = $$('#conceptosLista .tecnica');
+
+    /** Carga un concepto en la ventana, con recorrido circular. */
+    function pintar(i) {
+      const n = CONCEPTOS.length;
+      actual = ((i % n) + n) % n;
+      const c = CONCEPTOS[actual];
+      $('#modalIcono').innerHTML = ICONOS[c.icono];
+      $('#modalTitulo').textContent = c.titulo;
+      $('#modalCuerpo').innerHTML = `<p>${c.detalle}</p><div class="ejemplo">${c.ejemplo}</div>`;
+      $('#modalCuerpo').scrollTop = 0;
+      $('#modalPos').textContent = `${actual + 1} / ${n}`;
+      tarjetas.forEach((el, j) => el.classList.toggle('activo', j === actual));
     }
 
-    function abrir(c, card) {
-      if (card.classList.contains('activo')) { cerrar(); return; }
-      cerrar();
-      card.classList.add('activo');
-      card.setAttribute('aria-expanded', 'true');
-      panel.innerHTML = `
-        <div class="detalle__head">
-          ${ICONOS[c.icono]}
-          <h3>${c.titulo}</h3>
-          <button class="detalle__cerrar" aria-label="Cerrar">${ICONOS.cerrar}</button>
-        </div>
-        <div class="detalle__body">
-          <p>${c.detalle}</p>
-          <div class="ejemplo">${c.ejemplo}</div>
-        </div>`;
-      panel.querySelector('.detalle__cerrar').addEventListener('click', cerrar);
-      panel.classList.add('visible');
-      cont.parentNode.insertBefore(panel, cont.nextSibling);
+    function abrir(i, card) {
+      origen = card || null;
+      pintar(i);
+      if (modal.open) return;
+      if (typeof modal.showModal === 'function') modal.showModal();
+      else modal.setAttribute('open', '');       // respaldo sin soporte de <dialog>
+      document.body.classList.add('sin-scroll');
     }
+
+    function cerrar() {
+      if (typeof modal.close === 'function' && modal.open) modal.close();
+      else { modal.removeAttribute('open'); alCerrar(); }
+    }
+
+    function alCerrar() {
+      document.body.classList.remove('sin-scroll');
+      tarjetas.forEach(el => el.classList.remove('activo'));
+      if (origen) { origen.focus(); origen = null; }
+    }
+
+    modal.addEventListener('close', alCerrar);
+    $('#modalCerrar').addEventListener('click', cerrar);
+    $('#modalAnterior').addEventListener('click', () => pintar(actual - 1));
+    $('#modalSiguiente').addEventListener('click', () => pintar(actual + 1));
+
+    // Clic sobre el fondo oscurecido: el evento apunta al propio <dialog>.
+    modal.addEventListener('click', e => { if (e.target === modal) cerrar(); });
+
+    // Flechas del teclado para recorrer los conceptos sin cerrar la ventana.
+    modal.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') { e.preventDefault(); pintar(actual + 1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); pintar(actual - 1); }
+    });
   }
 
   /* ========================================================
