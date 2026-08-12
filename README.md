@@ -15,7 +15,8 @@
 | **Autor** | Andrés Giovanny Rubiano Muñoz "Andy Rubiano" |
 | **Correo** | arubiano67@unisalle.edu.co |
 | **Asignatura** | Sistemas de LLM Avanzados |
-| **Actividad** | Actividad 1 — Unidad 1: Fundamentos de los LLM |
+| **Actividad** | Actividad 1 — Entendiendo los Large Language Models (LLM's) |
+| **Unidad** | Unidad 1 — Fundamentos de los LLM |
 | **Programa** | Maestría en Inteligencia Artificial |
 | **Facultad** | Ingeniería |
 | **Universidad** | Universidad de La Salle |
