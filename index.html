@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Grandes Modelos de Lenguaje · Infografía interactiva | Universidad de La Salle</title>
+  <meta name="description" content="Infografía interactiva sobre grandes modelos de lenguaje (LLM): conceptos, funcionamiento, modelos de código abierto y aplicaciones en el sector energético. Maestría en Inteligencia Artificial, Universidad de La Salle.">
+  <meta name="author" content="Andrés Giovanny Rubiano Muñoz">
+  <meta name="theme-color" content="#002d57">
+
+  <link rel="icon" href="assets/img/logo-lasalle.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+<!-- ============ NAVEGACIÓN ============ -->
+<nav class="nav" id="nav">
+  <div class="contenedor nav__inner">
+    <a href="#inicio" class="nav__marca">
+      <img src="assets/img/logo-lasalle.png" alt="Universidad de La Salle" class="nav__logo">
+    </a>
+    <div class="nav__links" id="navLinks">
+      <a class="nav__link" href="#conceptos">Conceptos</a>
+      <a class="nav__link" href="#laboratorio">Funcionamiento</a>
+      <a class="nav__link" href="#modelos">Modelos abiertos</a>
+      <a class="nav__link" href="#casos">Aplicaciones</a>
+      <a class="nav__link" href="#asistente">Asistente</a>
+      <a class="nav__link" href="#enlaces">Enlaces</a>
+      <a class="nav__link" href="#bibliografia">Bibliografía</a>
+    </div>
+  </div>
+  <div class="progreso" id="progreso"></div>
+</nav>
+
+<!-- ============ PORTADA ============ -->
+<header class="portada" id="inicio">
+  <div class="contenedor portada__grid">
+    <div>
+      <span class="pastilla">Sistemas de LLM Avanzados · Unidad 1 · 2026</span>
+      <h1>Grandes modelos de <em>lenguaje</em></h1>
+      <p class="portada__lead">
+        Qué es un LLM, cómo funciona por dentro, qué modelos de código abierto existen y para qué
+        sirven en una industria concreta: el sector energético. Esta infografía es interactiva —
+        tokeniza tu propio texto, explora el espacio semántico, lee un mapa de atención, genera
+        texto token a token y consulta un asistente documental con recuperación aumentada.
+      </p>
+      <div class="portada__cta">
+        <a href="#laboratorio" class="btn btn--primario">Abrir el laboratorio <span id="ctaFlecha"></span></a>
+        <a href="#conceptos" class="btn btn--secundario">Ver los conceptos</a>
+      </div>
+      <div class="portada__datos" id="portadaDatos"></div>
+    </div>
+
+    <aside class="autor">
+      <div class="autor__avatar">
+        <img src="assets/img/autor.png" alt="Andrés Giovanny Rubiano Muñoz" class="autor__foto">
+      </div>
+      <h2 class="autor__nombre">Andrés Giovanny Rubiano Muñoz</h2>
+      <p class="autor__rol">Maestría en Inteligencia Artificial</p>
+      <a class="autor__correo" href="mailto:arubiano67@unisalle.edu.co">arubiano67@unisalle.edu.co</a>
+      <div class="autor__meta">
+        <span>Sistemas de LLM Avanzados</span>
+        <span>Facultad de Ingeniería</span>
+        <span>Universidad de La Salle</span>
+      </div>
+    </aside>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ 1. CONCEPTOS ============ -->
+<section class="seccion" id="conceptos">
+  <div class="contenedor">
+    <div class="seccion__cabecera reveal">
+      <span class="seccion__num">01 — Fundamentos</span>
+      <h2>Los conceptos que sostienen un LLM</h2>
+      <p>Trece ideas bastan para entender qué hace un modelo de lenguaje y por qué funciona.
+         Haz clic en cualquier tarjeta para ver la explicación ampliada y un ejemplo concreto.</p>
+    </div>
+    <div class="tecnicas reveal" id="conceptosLista"></div>
+    <div class="detalle" id="detalleConcepto" role="region" aria-live="polite"></div>
+
+    <!-- Autoevaluación -->
+    <div class="quiz reveal" id="quiz">
+      <div class="quiz__cabecera">
+        <div class="panel__titulo" id="tituloQuiz">Compruébalo: seis preguntas</div>
+        <div class="quiz__marcador" id="quizMarcador">0 / 6</div>
+      </div>
+      <div class="quiz__cuerpo" id="quizCuerpo"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2. LABORATORIO ============ -->
+<section class="seccion seccion--alt" id="laboratorio">
+  <div class="contenedor">
+    <div class="seccion__cabecera reveal">
+      <span class="seccion__num">02 — Cómo funciona</span>
+      <h2>El laboratorio: cuatro etapas, en vivo</h2>
+      <p>Un LLM convierte texto en tokens, los tokens en vectores, los vectores en atención y la
+         atención en una distribución de probabilidad sobre el siguiente token. Aquí puedes recorrer
+         esas cuatro etapas con tu propio texto; todo se calcula en tu navegador.</p>
+    </div>
+
+    <div class="tabs reveal" id="tabsLab"></div>
+
+    <!-- Etapa 1 · Tokenización -->
+    <div class="etapa visible" id="etapa-tokens">
+      <div class="lab">
+        <div class="panel">
+          <div class="panel__titulo" id="tituloTokenEntrada">Texto de entrada</div>
+          <label class="solo-lector" for="entradaTokens">Texto a tokenizar</label>
+          <textarea class="entrada" id="entradaTokens" spellcheck="false"></textarea>
+          <div class="ejemplos" id="ejemplosTokens"></div>
+          <div class="aviso" id="avisoTokens"></div>
+        </div>
+        <div class="panel">
+          <div class="panel__titulo" id="tituloTokenSalida">Tokens y ventana de contexto</div>
+          <div id="salidaTokens"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Etapa 2 · Embeddings -->
+    <div class="etapa" id="etapa-embeddings">
+      <div class="lab">
+        <div class="panel">
+          <div class="panel__titulo" id="tituloEmbEntrada">Término a consultar</div>
+          <label class="solo-lector" for="entradaEmb">Palabra</label>
+          <input class="entrada entrada--linea" id="entradaEmb" type="text" spellcheck="false" autocomplete="off">
+          <div class="ejemplos" id="ejemplosEmb"></div>
+          <div class="aviso" id="avisoEmb"></div>
+        </div>
+        <div class="panel">
+          <div class="panel__titulo" id="tituloEmbSalida">Vecinos en el espacio semántico</div>
+          <div id="salidaEmb"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Etapa 3 · Atención -->
+    <div class="etapa" id="etapa-atencion">
+      <div class="lab lab--ancho">
+        <div class="panel">
+          <div class="panel__titulo" id="tituloAtnEntrada">Frase a analizar</div>
+          <label class="solo-lector" for="entradaAtn">Frase</label>
+          <input class="entrada entrada--linea" id="entradaAtn" type="text" spellcheck="false" autocomplete="off">
+          <div class="ejemplos" id="ejemplosAtn"></div>
+          <div class="aviso" id="avisoAtn"></div>
+        </div>
+        <div class="panel">
+          <div class="panel__titulo" id="tituloAtnSalida">Mapa de atención</div>
+          <div id="salidaAtn"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Etapa 4 · Generación -->
+    <div class="etapa" id="etapa-generacion">
+      <div class="lab">
+        <div class="panel">
+          <div class="panel__titulo" id="tituloGenEntrada">Contexto y muestreo</div>
+          <label class="solo-lector" for="entradaGen">Texto inicial</label>
+          <textarea class="entrada" id="entradaGen" spellcheck="false" style="min-height:110px"></textarea>
+          <div class="ejemplos" id="ejemplosGen"></div>
+
+          <div class="controles">
+            <div class="control">
+              <label for="temperatura">Temperatura <b id="valorTemperatura">0.80</b></label>
+              <input type="range" id="temperatura" min="0.1" max="2" step="0.05" value="0.8">
+              <span class="control__nota">Baja: determinista y repetitivo · Alta: diverso e inestable</span>
+            </div>
+            <div class="control">
+              <label for="topk">Top-k <b id="valorTopk">6</b></label>
+              <input type="range" id="topk" min="1" max="12" step="1" value="6">
+              <span class="control__nota">Cuántos candidatos entran en el muestreo</span>
+            </div>
+          </div>
+
+          <div class="acciones">
+            <button class="btn btn--primario btn--sm" id="btnUno" type="button">Un token</button>
+            <button class="btn btn--secundario btn--sm" id="btnVarios" type="button">15 tokens</button>
+            <button class="btn btn--secundario btn--sm" id="btnReiniciar" type="button">Reiniciar</button>
+          </div>
+          <div class="aviso" id="avisoGen"></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel__titulo" id="tituloGenSalida">Distribución del siguiente token</div>
+          <div id="salidaGen"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3. MODELOS ABIERTOS ============ -->
+<section class="seccion" id="modelos">
+  <div class="contenedor">
+    <div class="seccion__cabecera reveal">
+      <span class="seccion__num">03 — Código abierto</span>
+      <h2>Modelos abiertos: quién es quién</h2>
+      <p>«Open source» abarca desde publicar solo los pesos hasta liberar también datos, código y
+         puntos de control. Filtra el catálogo por el tipo de uso que necesites y revisa siempre la
+         licencia antes de llevar un modelo a producción.</p>
+    </div>
+    <div class="filtros reveal" id="filtrosModelos"></div>
+    <div class="librerias reveal" id="listaModelos"></div>
+
+    <div class="seccion__cabecera seccion__cabecera--sub reveal">
+      <h3>Cómo se ejecutan</h3>
+      <p>Un modelo abierto no sirve de nada sin la capa que lo ejecuta. Estas son las herramientas
+         que van del portátil al servidor de producción.</p>
+    </div>
+    <div class="herramientas reveal" id="listaHerramientas"></div>
+  </div>
+</section>
+
+<!-- ============ 4. APLICACIONES ============ -->
+<section class="seccion seccion--alt" id="casos">
+  <div class="contenedor">
+    <div class="seccion__cabecera reveal">
+      <span class="seccion__num">04 — Aplicaciones</span>
+      <h2>Cuatro aplicaciones en el sector energético</h2>
+      <p>La industria seleccionada es la distribución y comercialización de energía eléctrica.
+         Cada pestaña presenta un flujo completo, del dato de entrada a la decisión, con los seis
+         pasos que lo componen.</p>
+    </div>
+    <div class="tabs reveal" id="tabsCasos"></div>
+    <div id="contenidoCasos"></div>
+  </div>
+</section>
+
+<!-- ============ 5. ASISTENTE RAG ============ -->
+<section class="seccion" id="asistente">
+  <div class="contenedor">
+    <div class="seccion__cabecera reveal">
+      <span class="seccion__num">05 — Demostración</span>
+      <h2>Asistente documental con recuperación aumentada</h2>
+      <p>El caso de la pestaña «copiloto de mantenimiento», funcionando. Pregunta en lenguaje
+         natural: el sistema busca en diez fragmentos de documentación interna, muestra qué recuperó,
+         arma el prompt exacto que recibiría el modelo y responde citando la fuente.</p>
+    </div>
+
+    <div class="rag">
+      <div class="panel reveal">
+        <div class="panel__titulo" id="tituloRagEntrada">Pregunta del usuario</div>
+        <label class="solo-lector" for="entradaRag">Pregunta</label>
+        <input class="entrada entrada--linea" id="entradaRag" type="text" spellcheck="false" autocomplete="off">
+        <div class="ejemplos" id="ejemplosRag"></div>
+
+        <div class="panel__titulo panel__titulo--sub">Fragmentos recuperados</div>
+        <div id="recuperados"></div>
+
+        <div class="aviso" id="avisoRag"></div>
+      </div>
+
+      <div class="panel reveal">
+        <div class="panel__titulo" id="tituloRagSalida">Respuesta anclada</div>
+        <div class="respuesta" id="respuesta" data-anclada="true"></div>
+
+        <div class="panel__titulo panel__titulo--sub">Prompt enviado al modelo</div>
+        <pre class="prompt" id="promptRag"></pre>
+        <div class="prompt__pie" id="promptPie"></div>
+      </div>
+    </div>
+
+    <div class="base reveal">
+      <div class="base__cabecera">
+        <h3>Base documental indexada</h3>
+        <span id="baseConteo"></span>
+      </div>
+      <div class="base__lista" id="baseLista"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 6. ENLACES ============ -->
+<section class="seccion seccion--alt" id="enlaces">
+  <div class="contenedor">
+    <div class="seccion__cabecera reveal">
+      <span class="seccion__num">06 — Para explorar</span>
+      <h2>Enlaces de interés</h2>
+      <p>Herramientas externas para encontrar modelos, ejecutarlos en tu propio equipo, visualizar
+         lo que ocurre por dentro y seguir aprendiendo. Todos abren en una pestaña nueva.</p>
+    </div>
+    <div class="filtros reveal" id="filtrosEnlaces"></div>
+    <div class="enlaces reveal" id="listaEnlaces"></div>
+  </div>
+</section>
+
+<!-- ============ 7. BIBLIOGRAFÍA ============ -->
+<section class="seccion" id="bibliografia">
+  <div class="contenedor">
+    <div class="seccion__cabecera reveal">
+      <span class="seccion__num">07 — Referencias</span>
+      <h2>Bibliografía</h2>
+      <p>Fuentes citadas a lo largo de la infografía, en formato IEEE.</p>
+    </div>
+    <ol class="biblio reveal" id="listaBiblio"></ol>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ PIE ============ -->
+<footer class="pie">
+  <div class="contenedor pie__grid">
+    <img src="assets/img/logo-lasalle.png" alt="Universidad de La Salle" class="pie__logo">
+    <p>Infografía interactiva sobre grandes modelos de lenguaje.<br>
+       Facultad de Ingeniería · Maestría en Inteligencia Artificial · Sistemas de LLM Avanzados</p>
+    <div class="pie__autor">
+      <div class="pie__creditos">
+        <b>Andrés Giovanny Rubiano Muñoz</b><br>
+        arubiano67@unisalle.edu.co<br>
+        Bogotá, Colombia · 2026
+      </div>
+      <div class="pie__avatar">
+        <img src="assets/img/autor.png" alt="Andrés Giovanny Rubiano Muñoz">
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/datos.js"></script>
+<script src="assets/js/llm.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
